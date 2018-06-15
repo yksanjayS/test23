@@ -1,0 +1,44 @@
+﻿@using RemoteAnalaysis.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+<section id="login" class="col-md-offset-4 col-sm-offset-4 col-lg-offset-4 col-md-4 col-sm-4 col-lg-4 visible">
+    <div class="login-box-plain">
+        <h3 class="bigintro">Sign In</h3>
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group" style="padding-left:5%;">
+                @Html.LabelFor(m => m.Userid)
+                <i class="fa fa-envelope"></i>
+                @Html.TextBoxFor(m => m.Userid, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Userid, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group" style="padding-left:5%;">
+                @Html.LabelFor(m => m.Password)
+                <i class="fa fa-lock"></i>
+                @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group" style="padding-left:5%;">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                </div>
+                <div class="col-md-10">
+                    @Html.LabelFor(m => m.RememberMe)
+                </div>
+            </div>
+
+            <div class="form-group" style="padding-left:5%;">
+                <div class=" col-md-10">
+                    <button type="submit" id="btnLogin" class="btn btn-primary">Sign In</button>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
